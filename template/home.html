@@ -1,0 +1,227 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: monospace;
+        }
+        body{ 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: url("{%static '/img/bg.avif'%}") no-repeat;
+            background-size: cover;
+            background-position: center;
+        }
+
+        header{
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 100px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 99;
+        }
+        .navigation
+        {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navigation .a{
+            position: relative;
+            font-size: 1.5em;
+            color: #0a8287;
+            text-decoration: none;
+            font-weight: 500;
+            margin-left: 40px;
+        }
+
+        .navigation .a::after{
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -6px;
+            width: 100%;
+            height: 3px;
+            background: #0a8287;
+            border-radius: 5px;
+            transform-origin: right;
+            transform: scaleX(0);
+            transition: transform .5s;
+        }
+
+        .navigation .a:hover::after{
+            transform-origin: left;
+            transform: scaleX(1);
+        }
+        
+
+        .navigation .bttnLogin-popup{
+            width: 130px;
+            height: 50px;
+            background: transparent;
+            border: 2px solid #55ede8;
+            outline: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1.1em;
+            color: #44ceea;
+            font-weight: 500;
+            margin-left: 40px;
+            transform: .5s;
+        }
+
+        .navigation .bttnLogin-popup:hover{
+            background: #0a8287;
+            color: #aed9d9;
+        }
+
+        .top-section{
+            margin: 1px;
+            padding: 0;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .left-section p{
+            width: 900px;
+            height: 300px;
+            background: transparent;
+            border: 2px solid rgba(255,255, 255, .5);
+            border-radius: 10px;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 0 15px rgba(9, 89, 93, 0.5) ;
+            padding: 40px;
+            margin: 10px;
+            font-size: .8em;
+            letter-spacing: 1px;
+            line-height: 23px;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            font-weight: 300;
+            color: #0b5c5f;
+        }
+
+        .left-section h1{
+            margin-bottom: 50px;
+            font-size: 40px;
+            font-family: cursive;
+            color: #0a8287;
+            font-weight: 600;
+        }
+
+    .search-container{
+        display: block;
+    }
+
+    .search-container h2{
+        margin-bottom: 50px;
+            font-size: 20px;
+            font-family: cursive;
+            color: #0a8287;
+            font-weight: 600;
+    }
+    .search-container{
+        display: flex;
+        justify-content: center;
+        padding: 50px;
+    }
+
+    .search-container h2{
+        margin: 20px;
+        font-size: 2em;
+        font-family: monospacex ;
+        font-weight: 600;
+        color: #235c5a;        
+    }
+
+    .search-container input{
+        height: 50px;
+        width: 500px;
+    }
+
+
+    .btn{
+        width: 100%;
+        height: 40px;
+        margin-top: 20px;
+        background: #0a8287;
+        border: none;
+        outline: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 2em;
+        color: #c3e3e8;
+        font-weight: 500;
+    }
+
+    .search-container .btn:hover{
+    box-shadow: 0 3px 6px rgba(39,45,45,0.5);
+}
+
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="icon">
+            <script src="https://cdn.lordicon.com/ritcuqlt.js"></script>
+             <lord-icon
+                src="https://cdn.lordicon.com/gmzxduhd.json"
+                trigger="loop"
+                delay="2000"
+                style="width:50px;height:50px">
+            </lord-icon>
+        </nav>
+        <h2 class="logo">Logo</h2>
+            <nav class="navigation">
+            <a href="{%url 'home'%}" class="a">Home</a>
+            <a href="{%url 'booking'%}" class="a">Bookings</a>
+            <a href="{%url 'contact'%}" class="a">Contact us</a>
+            <a href="{%url 'signup'%}" class="a">Sign up</a>
+            {% if user.is_authenticated %}
+            <a href="{% url 'logout'%}" > <button class="bttnLogin-popup" type="submit">Logout</button></a>
+            {% else %}
+            <a href="{% url 'logins'%}" > <button class="bttnLogin-popup" type="submit">Login</button></a>
+            {% endif %}
+           
+        </nav>
+    </header>
+
+    <div class="main-section">
+        <div class="top-section">
+        <div class="left-section">
+            <h1>Book Your Bus Ticket with Us</h1>
+            <p>Who doesn’t love exploring places by road? The captivating landscapes that are seen on both sides of the bus are the sites to behold. Travelers who love to explore places by road can choose online bus booking at EaseMyTrip and also save huge money. Why would you go out and look for a travel agency to book a tour bus when you can do it by yourself? It takes less than a minute to book a bus ticket at EaseMyTrip. The simple interface, easy navigation, and fast speed of the portal allow you to book a bus to your favorite destination within a few seconds.
+
+
+                Whether you want to travel via AC/Non-AC bus, semi-sleeper bus, smart bus, deluxe bus, luxury bus, budgeted bus, or Volvo bus booking EaseMyTrip has got everything covered for you. Enjoy a hassle-free booking experience at eeeeeeeeee and discover your favorite place. There are around 2000+ bus operators for online bus ticket booking at this portal, choose the best one that suits your bus ticket booking demand and enjoy your bus journey like never before!
+                M</p>
+        </div>
+        <div class="right-section">
+            <img src="{%static '/img/bus.png'%}" width="absolute" height="300px">
+        </div>    
+    </div><form action="booking" method="post">
+        {%csrf_token%}
+    <div class="search-container">
+        <h2>Book your tickets now !</h2>
+         <input type="submit" name="book" value="BOOK NOW" class="btn"></div></form>
+
+
+         
+</div>
+</body>
+</html>
